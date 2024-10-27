@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Brain Stroke Prediction Tool</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+  <style>
+    body {
+      background-image: url('image1.jpeg'); /* Adjust path as needed */
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      color: white; /* Ensures text is readable on dark backgrounds */
+    }
+
+    .container {
+      background-color: rgba(0, 0, 0, 0.6); /* Dark background for readability */
+      padding: 20px;
+      border-radius: 10px;
+    }
+
+    .chatbot {
+      margin-top: 20px;
+      width: 100%;
+      border: 2px solid #007bff;
+      border-radius: 10px;
+      background-color: white;
+      box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.2);
+      color: black; /* Adjusting text color for better visibility */
+    }
+    .chat-header {
+      background-color: #007bff;
+      color: white;
+      padding: 10px;
+      text-align: center;
+      font-weight: bold;
+      border-top-left-radius: 8px;
+      border-top-right-radius: 8px;
+    }
+
+  </style>
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="index.html">Stroke Predictor</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link active" href="index.html">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="facts.html">Facts About Brain Stroke</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="predict.html">Stroke Predictor</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container mt-5 text-center">
+    <h1>Welcome to the Brain Stroke Prediction Tool</h1>
+    <p>Use our tool to learn more about stroke risks and predictions based on your input.</p>
+    <a href="predict.html" class="btn btn-primary btn-lg">Go to Stroke Predictor</a>
+  </div>
+
+  <!-- Chatbot -->
+  <div class="container mt-5">
+    <div class="chatbot p-4 border rounded">
+      <div class="chat-header">Stroke Assistant</div>
+      <div class="chat-messages bg-light p-3 mb-3" id="chat-messages" style="height: 300px; overflow-y: auto;"></div>
+      <div class="chat-input">
+        <input type="text" id="chat-input" class="form-control" placeholder="Ask me about stroke..." />
+        <button id="chat-submit" class="btn btn-primary mt-2">Send</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Function to handle user input and bot response
+    document.getElementById('chat-submit').addEventListener('click', function () {
+      const chatInput = document.getElementById('chat-input');
+      const userMessage = chatInput.value.trim().toLowerCase();
+      const chatMessages = document.getElementById('chat-messages');
+
+      // Check if user input is not empty
+      if (userMessage !== '') {
+        // Display user message in the chat
+        const userMessageElement = document.createElement('div');
+        userMessageElement.classList.add('text-end', 'mb-2');
+        userMessageElement.innerHTML = `<strong>You:</strong> ${userMessage}`;
+        chatMessages.appendChild(userMessageElement);
+
+        // Clear input field after sending
+        chatInput.value = '';
+
+        // Simulate bot response after a short delay
+        const botMessage = getBotResponse(userMessage);
+        const botMessageElement = document.createElement('div');
+        botMessageElement.classList.add('text-start', 'mb-2');
+        botMessageElement.innerHTML = `<strong>Bot:</strong> ${botMessage}`;
+        chatMessages.appendChild(botMessageElement);
+
+        // Scroll chat to the bottom
+        chatMessages.scrollTop = chatMessages.scrollHeight;
+      }
+    });
+
+    // Function to return predefined chatbot responses
+    function getBotResponse(userMessage) {
+      const faq = {
+        'types of stroke': 'There are two main types of strokes: ischemic (caused by a blockage) and hemorrhagic (caused by bleeding in the brain).',
+        'what is ischemic stroke': 'An ischemic stroke occurs when a blood clot blocks or narrows an artery leading to the brain. It is the most common type of stroke.',
+        'what is hemorrhagic stroke': 'A hemorrhagic stroke happens when a blood vessel in the brain ruptures, causing bleeding and pressure that damages brain cells.',
+        'what is transient ischemic attack': 'A transient ischemic attack (TIA), often called a mini-stroke, occurs when blood flow to the brain is temporarily interrupted, causing stroke-like symptoms that usually resolve within 24 hours.',
+        'stroke symptoms': 'Symptoms of stroke include sudden numbness or weakness in the face, arm, or leg, confusion, trouble speaking, and loss of balance or coordination.',
+        'factors causing stroke': 'Risk factors for stroke include high blood pressure, smoking, diabetes, obesity, and high cholesterol.',
+        'prevent stroke': 'Prevent stroke by managing blood pressure, quitting smoking, eating a healthy diet, exercising regularly, and controlling diabetes.',
+        'what is a brain aneurysm': 'A brain aneurysm is a bulging, weakened area in the wall of an artery in the brain, which can burst and lead to a hemorrhagic stroke.',
+        'stroke treatment': 'Stroke treatment depends on the type. For ischemic strokes, clot-busting drugs (like tPA) are used. Hemorrhagic strokes may require surgery to stop the bleeding.',
+        'what is tpa for stroke': 'tPA (tissue plasminogen activator) is a medication used to dissolve blood clots in ischemic stroke. It must be administered within a few hours of symptom onset for maximum effectiveness.',
+        'stroke recovery': 'Stroke recovery varies depending on the severity and area affected. Rehabilitation can take months or years, focusing on improving physical abilities and cognitive function.',
+        'stroke diagnosis': 'Strokes are diagnosed through physical examination, medical history, blood tests, and imaging tests like CT or MRI scans.',
+        'how to recognize stroke': 'Recognize a stroke using the FAST method: Face drooping, Arm weakness, Speech difficulty, and Time to call emergency services.'
+      };
+
+      // Exact matching for known questions
+      if (faq[userMessage]) {
+        return faq[userMessage];
+      }
+
+      // Suggest some valid questions if the input doesn't match
+      return 'I\'m not sure about that. Here are some things you can ask me: "What is a stroke?", "Symptoms of stroke?", "How to prevent strokes?" and more.';
+    }
+  </script>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

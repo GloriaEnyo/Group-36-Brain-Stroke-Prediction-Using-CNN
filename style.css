@@ -1,0 +1,60 @@
+/* General Page Styling */
+body {
+  font-family: Arial, sans-serif;
+}
+body {
+  background-image: url('image4.png'); /* Adjust path as needed */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  color: white; /* Ensures text is readable on dark backgrounds */
+}
+
+/* Chatbot */
+.chatbot {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 300px;
+  background-color: #f8fafa;
+  border: 1px solid #dee2e6;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.chat-header {
+  background-color: #007bff;
+  color: white;
+  padding: 10px;
+  font-weight: bold;
+}
+
+.chat-messages {
+  height: 200px;
+  overflow-y: auto;
+  padding: 10px;
+  background-color: white;
+  border-top: 1px solid #dee2e6;
+  border-bottom: 1px solid #dee2e6;
+}
+
+.container {
+  background-color: rgba(0, 0, 0, 0.6); /* Dark background for readability */
+  padding: 20px;
+  border-radius: 10px;
+}
+
+.user-message {
+  text-align: right;
+  color: #007bff;
+}
+.bot-message {
+  text-align: left;
+  color: #28a745;
+}
+
+.chat-input {
+  padding: 10px;
+}
+
+  
